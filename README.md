@@ -22,5 +22,5 @@ Fecha entrega: 06 de octubre del 2023
 ### Imágenes de la APP
 
 <div style="text-align: center">
-    <img src="https://github.com/MauricioRL15/Imagenes/blob/b2c5651a4bbb214fb5594489f85c92864769c9dd/P8_img1.png?raw=true" alt="Imagen 1" width="400" height="850"/>
+    <img src="https://github.com/MauricioRL15/Imagenes/blob/b2c5651a4bbb214fb5594489f85c92864769c9dd/P9_img1.jpg?raw=true" alt="Imagen 1" width="400" height="850"/>
 </div>
