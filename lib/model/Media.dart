@@ -1,4 +1,5 @@
 import 'package:dmi_practica09_200070/common/Util.dart';
+import 'package:dmi_practica09_200070/common/MediaProvider.dart';
 
 class Media {
   int id;
@@ -21,22 +22,22 @@ class Media {
     return DateTime.parse(releaseDate).year;
   }
 
-  factory Media(Map jsonMap) {
+  factory Media(Map jsonMap, MediaType mediaType) {
     try {
-      return new Media.deserialize(jsonMap);
+      return Media.deserialize(jsonMap, mediaType);
     } catch (ex) {
       throw ex;
     }
   }
 
-  Media.deserialize(Map json)
+  Media.deserialize(Map json, MediaType mediaType)
       : id = json["id"].toInt(),
         voteAverage = json["vote_average"].toDouble(),
         title = json["title"],
         posterPath = json["poster_path"] ?? "",
         backdropPath = json["backdrop_path"] ?? "",
         overview = json["overview"],
-        releaseDate = json["release_date"],
+        releaseDate = json[mediaType == MediaType.movie ? "release_date" : "first_air_date"],
         genreIds = json["genre_ids"].toList();
 
   // Media.deserialize(Map json)
@@ -49,3 +50,5 @@ class Media {
   //       releaseDate = json["release_date"], // Corrected field name
   //       genreIds = List<int>.from(json["genre_ids"]);
 }
+
+enum MediaType {movie, show}

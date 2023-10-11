@@ -81,7 +81,7 @@ class MediaListItem extends StatelessWidget {
                 ),
               ),
               Positioned(
-                  right: 7.0,
+                  right: 5.0,
                   bottom: 10.0,
                   child: Column(
                     children: <Widget>[

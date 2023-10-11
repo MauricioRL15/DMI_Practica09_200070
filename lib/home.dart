@@ -1,6 +1,8 @@
+import 'package:dmi_practica09_200070/model/Media.dart';
 import 'package:flutter/material.dart';
 // import 'package:dmi_practica08_200070/common/HttpHandler.dart';
 import 'package:dmi_practica09_200070/media_list.dart';
+import 'package:dmi_practica09_200070/common/MediaProvider.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key});
@@ -10,6 +12,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  final MediaProvider movieProvider = MovieProvider();
+  final MediaProvider showProvider = ShowProvider();
+
+  MediaType mediaType = MediaType.movie;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,14 +39,24 @@ class _HomeState extends State<Home> {
             DrawerHeader(child: Material()),
             ListTile(
               title: Text("Peliculas"),
+              selected: mediaType == MediaType.movie,
               trailing: Icon(Icons.local_movies),
+              onTap: (){
+                _changeMediaType(MediaType.movie);
+                Navigator.of(context).pop();
+              },
             ),
             Divider(
               height: 5.0,
             ),
             ListTile(
               title: Text("Televisión"),
+              selected: mediaType == MediaType.show,
               trailing: Icon(Icons.live_tv_rounded),
+              onTap: (){
+                _changeMediaType(MediaType.show);
+                Navigator.of(context).pop();
+              },
             ),
             Divider(
               height: 5.0,
@@ -51,8 +69,8 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-      body: new PageView(
-        children: <Widget>[new MediaList()],
+      body: PageView(
+        children: _getMediaList()
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: _obtenerIconos(),
@@ -70,4 +88,22 @@ class _HomeState extends State<Home> {
           icon: Icon(Icons.star_rounded), label: "Mejor Valoradas"),
     ];
   }
+
+  void _changeMediaType(MediaType type){
+    if (mediaType != type) {
+      setState(() {
+        mediaType = type;
+      });
+    }
+  }
+
+  List<Widget> _getMediaList(){
+    return (mediaType == MediaType.movie) ?
+    <Widget>[
+      MediaList(movieProvider)
+    ]:<Widget>[
+      MediaList(showProvider)
+    ];
+  }
+
 }
